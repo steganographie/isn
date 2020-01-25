@@ -1,4 +1,4 @@
-from PIL import Image
+from PIL import Image #Importation de Python Imaging Library
 im = Image.open("image_avec_message_codé.png")
 r,g,b=im.split()
 r=list(r.getdata())
@@ -15,4 +15,4 @@ message=""
 for k in range(0,q):
     l=b[8*k:8*k+8]
     message=message+chr(int(l,2))
-print (message)   
+print (message)
