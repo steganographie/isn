@@ -1,4 +1,5 @@
 from PIL import Image #Importation de la librairie Pyhton Imaging Library
+#ceci est un test
 im = Image.open("image_avec_message_codé.png")
 r,g,b=im.split()
 r=list(r.getdata())
