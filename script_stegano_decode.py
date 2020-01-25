@@ -1,5 +1,6 @@
 from PIL import Image #Importation de Python Imaging Library
 im = Image.open("image_avec_message_codé.png")
+#UN COMMENTAIRE DE PLUS
 r,g,b=im.split()
 r=list(r.getdata())
 #lecture de la longueur de la chaine
