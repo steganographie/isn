@@ -1,34 +1,37 @@
-from PIL import Image #Importation de la librairie PIL, module qui permet de traiter des images.
+from PIL import Image #Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
 
-im = Image.open("image.png") #Variable qui ouvre le fichier image.png
+img = Image.open("image.png") #Enregistre l'image sous la variable
 
-w,h=im.size #on récupère les dimensions de l'image
+l,h = img.size #Renvoie un tupple contenant (largeur,hauteur)
 
-r,g,b=im.split() #On éclate l'image en trois (rouge vert bleu)
+r,g,b= img.split() #Renvoie un tupple,
+# Crée 3 nouvelles images à partir de celle de base, contenant chacune des bandes originales dans l'ordre rouge, vert et bleu
 
-r=list(r.getdata()) #on transforme l'image en liste
+r=list(r.getdata()) #on transforme l'image en liste de valeurs de pixels ATTENTION PAS COMPRIS
 
-c=input("Entrez le texte qui sera encodé dans l'image : ")
+c=input("Entrez le texte qui sera encodé dans l'image : ") #Demande le texte qui sera entré dans l'image
 
-u=len(c) #on note la longueur de la chaine et on la transforme en binaire
+u=len(c) #Renvoie la longeur de la chaine rentrée par l'utilisateur
 
-v=bin(len(c))[2:].rjust(8,"0") #on transforme la chaine en une liste de 0 et de 1 
+v=bin(u)[2:].rjust(8,"0") #On transforme en binaire, met un longeur de 8 bits ATTENTION PAS COMPRIS .rjust
+#Se passer de bin() et créer notre propre converteur, comprendre quel bits sont enlevés et pourquoi.
 
-ascii=[bin(ord(x))[2:].rjust(8,"0") for x in c] #transformation de la liste en chaine
+ascii=[bin(ord(i))[2:].rjust(8,"0") for i in c] # ATTENTION PAS COMPRIS
 
-a=''.join(ascii) #on code la longueur de la liste dans les 8 premiers pixels rouges
+a=''.join(ascii) #crée liste qui prends la valeur des 8 bits en rouge
 
 for j in range(8):
-    r[j]=2*int(r[j]//2)+int(v[j])
+    r[j]=2*int(r[j]//2)+int(v[j]) #PAS COMPRIS
 
-#on code la chaine dans les pixels suivants
-for i in range(8*u):
-    r[i+8]=2*int(r[i+8]//2)+int(a[i])
+#on code la chaine dans les pixels suivants PAS ENCORE COMPRS
+for k in range(8*u):
+    r[k+8]=2*int(r[k+8]//2)+int(a[k])
 
-#on recrée l'image rouge 
-nr = Image.new("L",(w,h))
+nr = Image.new("L",(l,h)) #Creation d'une nouvelle image vide de meme dimensions que celle importée, mode "L" signifie en 8bits pixels, en noir et blanc
 
-nr.putdata(r) #fusion des trois nouvelles images
+nr.putdata(r) #Ajout dans la nouvelle image des teintes rouges modifiées qui contiennent
 
-imgnew = Image.merge('RGB',(nr,g,b)) 
-imgnew.save("image_avec_message_codé.png") 
+imgnew = Image.merge('RGB',(nr,g,b)) #Ajoute les bandes bleues et vertes de l'image de base et y ajoute la nouvelle teinte rouge qui contient le texte
+#RGB =  3*8 bits pxiels, true colors
+
+imgnew.save("image_avec_message_codé.png") #Enregistre sous le nom choisit la nouvelle image, extension précisée

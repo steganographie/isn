@@ -1,16 +1,21 @@
-from PIL import Image #Importation de la librairie Pyhton Imaging Library
-#ceci est un test
-im = Image.open("image_avec_message_codé.png")
+from PIL import Image #Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
+
+im = Image.open("image_avec_message_codé.png") #Enregistre l'image sous la variable
+
 r,g,b=im.split()
+
 r=list(r.getdata())
-#lecture de la longueur de la chaine
+
 p=[str(x%2) for x in r[0:8]]
+
 q="".join(p)
+
 q=int(q,2)
-#lecture du message
+
 n=[str(x%2) for x in r[8:8*(q+1)]]
 
 b="".join(n)
+
 message=""
 
 for k in range(0,q):
