@@ -22,3 +22,5 @@ for k in range(0,q):
     l=b[8*k:8*k+8]
     message=message+chr(int(l,2))
 print (message)
+
+#Ceci est un test
