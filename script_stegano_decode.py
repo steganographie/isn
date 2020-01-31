@@ -23,4 +23,4 @@ for k in range(0,q):
     message=message+chr(int(l,2))
 print (message)
 
-#Ceci est un test
+#Ceci est un test bonjour
