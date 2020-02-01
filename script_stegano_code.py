@@ -13,28 +13,33 @@ red = list(r.getdata())  # Affiche toutes les valeurs de rouges présentes dans 
 green = list(g.getdata())
 blue = list(b.getdata())
 
-if blue > green and red :
+red_sum = sum(red) #Somme des intensités des rouges
+green_sum =sum(green)
+blue_sum = sum(blue)
+
+if blue_sum > green_sum and red_sum :
     print("Dominante bleue dans l'image")
 
-if green > red and blue:
+if green_sum > red_sum and blue_sum:
     print("Dominante verte dans l'image")
 
-if red > blue and green :  # Si le rouge domine
+if red_sum > blue_sum and green :  # Si le rouge domine
     print("Dominante rouge dans l'image")
 
-taille=[red, green, blue]
+taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
 
 taille.sort() #trie par ordre croissant
 
-if taille[0]==red:
-    couleur_acc=list(r.getdata())
+if taille[0]==red_sum: #si la couleur la plus présente est le rouge
+    couleur_acc=list(r.getdata()) # alors on modifie l'intensité du rouge
 
-if taille[0]==green:
+if taille[0]==green_sum:
     couleur_acc=list(g.getdata())
 
-if taille[0]==blue:
+if taille[0]==blue_sum:
     couleur_acc=list(b.getdata())
 
+#Passer par une somme n'est pas obligatoire mais n'a du sens car comment dit on qu'une liste et plus forte qu'une autre ? Alors que pour une somme, il faut juste comparer les résultats
 #### FIN ####
 
 c = input("Entrez le texte qui sera encodé dans l'image : ")  # Demande le texte qui sera entré dans l'image
