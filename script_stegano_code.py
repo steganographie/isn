@@ -28,7 +28,9 @@ if red_sum > blue_sum and green :  # Si le rouge domine
 
 taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
 
-taille.sort(reverse=True) #tri dans l'ordre décroissant
+taille.sort() #tri dans l'ordre croissant, on joue sur la couleur la moins présente
+
+#taille.sort(reverse=False) tri dans l'ordre décroissant pour jouer sur la couleur la plus présente
 
 if taille[0] == red_sum: #si la couleur la plus présente est le rouge
     couleur_acc=list(r.getdata()) # alors on modifie l'intensité du rouge
