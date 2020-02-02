@@ -9,7 +9,7 @@ r, g, b = img.split()  # Renvoie un tupple,
 
 #### CHOISIR QUELLE COULEUR AUGMENTER L'INTENSITE ####
 
-red = list(r.getdata())  # Affiche toutes les valeurs de rouges présentes dans la bande rouge
+red = list(r.getdata())  # Créée une liste contenant toutes les intensitées de la bande rouge
 green = list(g.getdata())
 blue = list(b.getdata())
 
@@ -23,7 +23,7 @@ if blue_sum > green_sum and red_sum :
 if green_sum > red_sum and blue_sum:
     print("Dominante verte dans l'image")
 
-if red_sum > blue_sum and green :  # Si le rouge domine
+if red_sum > blue_sum and green_sum :  # Si le rouge domine
     print("Dominante rouge dans l'image")
 
 taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
