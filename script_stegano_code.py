@@ -9,6 +9,8 @@ r, g, b = img.split()  # Renvoie un tupple,
 
 #### CHOISIR QUELLE COULEUR AUGMENTER L'INTENSITE ####
 
+couleur_acc=list(r.getdata())
+
 red = list(r.getdata())  # Créée une liste contenant toutes les intensitées de la bande rouge
 green = list(g.getdata())
 blue = list(b.getdata())
@@ -18,13 +20,13 @@ green_sum =sum(green)
 blue_sum = sum(blue)
 
 if blue_sum > green_sum and red_sum :
-    print("Dominante bleue dans l'image")
+    print("Couleur dominante : Bleu")
 
 if green_sum > red_sum and blue_sum:
-    print("Dominante verte dans l'image")
+    print("Couleur dominante : Vert")
 
 if red_sum > blue_sum and green_sum :  # Si le rouge domine
-    print("Dominante rouge dans l'image")
+    print("Couleur dominante : Rouge")
 
 taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
 
@@ -33,16 +35,16 @@ taille.sort() #tri dans l'ordre croissant, on joue sur la couleur la moins prés
 #taille.sort(reverse=False) tri dans l'ordre décroissant pour jouer sur la couleur la plus présente
 
 if taille[0] == red_sum: #si la couleur la plus présente est le rouge
-    couleur_acc=list(r.getdata()) # alors on modifie l'intensité du rouge
-    print("Couleur principale : rouge")
+    couleur_acc = list(r.getdata()) # alors on modifie l'intensité du rouge
+    print("Couleur la moins présente : rouge")
 
 if taille[0] == green_sum:
     couleur_acc = list(g.getdata())
-    print("Couleur principale : vert")
+    print("Couleur la moins présente : vert")
 
 if taille[0] == blue_sum:
     couleur_acc = list(b.getdata())
-    print("Couleur principale : bleu")
+    print("Couleur la moins présente : bleu")
 
 #Passer par une somme n'est pas obligatoire mais n'a du sens car comment dit on qu'une liste et plus forte qu'une autre ? Alors que pour une somme, il faut juste comparer les résultats
 #### FIN ####
@@ -65,11 +67,18 @@ for j in range(8):
 for k in range(8 * u):
     couleur_acc[k + 8] = 2 * int(couleur_acc[k + 8] // 2) + int(a[k])
 
-nr = Image.new("L", (l,h))  # Creation d'une nouvelle image vide de meme dimensions que celle importée, mode "L" signifie en 8bits pixels, en noir et blanc
+couleur_modifiee = Image.new("L", (l,h))  # Creation d'une nouvelle image vide de meme dimensions que celle importée, mode "L" signifie en 8bits pixels, en noir et blanc
 
-nr.putdata(couleur_acc)  # Ajout dans la nouvelle image des teintes rouges modifiées qui contiennent
+couleur_modifiee .putdata(couleur_acc)  # Ajout dans la nouvelle image des teintes rouges modifiées qui contiennent
 
-imgnew = Image.merge('RGB', (nr, g,b))  # Ajoute les bandes bleues et vertes de l'image de base et y ajoute la nouvelle teinte rouge qui contient le texte
+if taille[0] == red_sum:
+    imgnew = Image.merge('RGB', (couleur_modifiee , g,b))  # Ajoute les bandes bleues et vertes de l'image de base et y ajoute la nouvelle teinte rouge qui contient le texte
 # RGB =  3*8 bits pxiels, true colors
+
+if taille[0] == green_sum:
+    imgnew = Image.merge('RGB', (r, couleur_modifiee , b))
+
+if taille[0] == blue_sum:
+    imgnew = Image.merge('RGB', (r, g, couleur_modifiee ))
 
 imgnew.save("image_avec_message_codé.png")  # Enregistre sous le nom choisit la nouvelle image, extension précisée
