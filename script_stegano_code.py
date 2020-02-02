@@ -28,16 +28,19 @@ if red_sum > blue_sum and green :  # Si le rouge domine
 
 taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
 
-taille.sort() #trie par ordre croissant
+taille.sort(reverse=True) #tri dans l'ordre décroissant
 
-if taille[0]==red_sum: #si la couleur la plus présente est le rouge
+if taille[0] == red_sum: #si la couleur la plus présente est le rouge
     couleur_acc=list(r.getdata()) # alors on modifie l'intensité du rouge
+    print("Couleur principale : rouge")
 
-if taille[0]==green_sum:
-    couleur_acc=list(g.getdata())
+if taille[0] == green_sum:
+    couleur_acc = list(g.getdata())
+    print("Couleur principale : vert")
 
-if taille[0]==blue_sum:
-    couleur_acc=list(b.getdata())
+if taille[0] == blue_sum:
+    couleur_acc = list(b.getdata())
+    print("Couleur principale : bleu")
 
 #Passer par une somme n'est pas obligatoire mais n'a du sens car comment dit on qu'une liste et plus forte qu'une autre ? Alors que pour une somme, il faut juste comparer les résultats
 #### FIN ####
