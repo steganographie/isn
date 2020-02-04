@@ -2,6 +2,8 @@ from PIL import Image #Depuis le module PIL, importer image, permet d'effectuer 
 
 im = Image.open("image_avec_message_codé.png") #Enregistre l'image sous la variable
 
+### MODIFICATION DU CODE POUR DETECTER LA BANDE DE COULEUR QUI A CHANGE ###
+
 r,g,b=im.split()
 
 r=list(r.getdata())
