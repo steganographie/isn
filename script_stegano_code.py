@@ -7,9 +7,7 @@ l, h = img.size  # Renvoie un tupple contenant (largeur,hauteur)
 r, g, b = img.split()  # Renvoie un tupple,
 # Crée 3 nouvelles images à partir de celle de base, contenant chacune des bandes originales dans l'ordre rouge, vert et bleu
 
-#### CHOISIR QUELLE COULEUR AUGMENTER L'INTENSITE ####
-
-#couleur_acc=list(r.getdata())
+#### CHOISIR DE QUELLE COULEUR AUGMENTER L'INTENSITE ####
 
 red = list(r.getdata())  # Créée une liste contenant toutes les intensitées de la bande rouge
 green = list(g.getdata())
