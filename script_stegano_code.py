@@ -9,7 +9,7 @@ r, g, b = img.split()  # Renvoie un tupple,
 
 #### CHOISIR QUELLE COULEUR AUGMENTER L'INTENSITE ####
 
-couleur_acc=list(r.getdata())
+#couleur_acc=list(r.getdata())
 
 red = list(r.getdata())  # Créée une liste contenant toutes les intensitées de la bande rouge
 green = list(g.getdata())
