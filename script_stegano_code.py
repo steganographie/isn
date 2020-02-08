@@ -2,6 +2,8 @@ from tkinter.filedialog import * #Depuis tkinter import tout le contenu de filed
 
 from PIL import Image # Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
 
+import shutil
+
 ### IMPORTER L'IMAGE VIA INTERFACE GRAPHIQUE ###
 
 nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('png files','.png'),('all files','.*')])
@@ -94,4 +96,15 @@ if taille[0] == green_sum:
 if taille[0] == blue_sum:
     imgnew = Image.merge('RGB', (r, g, couleur_modifiee))
 
-imgnew.save("image_avec_message_codé.png")  # Enregistre sous le nom choisit la nouvelle image, extension précisée
+### CHOISIR OU ENREGISTRER LA NOUVELLE IMAGE ###
+
+imgnew.save("image_avec_message_codé.png")
+
+nom_repertoire = askdirectory(initialdir="/",title='Choisissez un repertoire')
+
+
+
+### FIN ###
+
+#imgnew.save("image_avec_message_codé.png")  # Enregistre sous le nom choisit la nouvelle image, extension précisée
+#enregistre dans le dossier ou se trouve le script en python
