@@ -102,8 +102,7 @@ imgnew.save("image_avec_message_codé.png")
 
 nom_repertoire = askdirectory(initialdir="/",title='Choisissez un repertoire')
 
-
-
+shutil.copy('image_avec_message_codé.png', nom_repertoire)
 ### FIN ###
 
 #imgnew.save("image_avec_message_codé.png")  # Enregistre sous le nom choisit la nouvelle image, extension précisée
