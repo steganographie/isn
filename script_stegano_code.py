@@ -1,8 +1,9 @@
 from tkinter.filedialog import * #Depuis tkinter import tout le contenu de filedialog
+from typing import Any, Tuple
 
 from PIL import Image # Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
 
-import shutil
+import shutil,os
 
 ### IMPORTER L'IMAGE VIA INTERFACE GRAPHIQUE ###
 
@@ -98,11 +99,14 @@ if taille[0] == blue_sum:
 
 ### CHOISIR OU ENREGISTRER LA NOUVELLE IMAGE ###
 
+nom_repertoire = askdirectory(initialdir="/",title='Choisissez un repertoire') #demande le repertoire
+
+print(nom_repertoire)
+
 imgnew.save("image_avec_message_codé.png")
+shutil.copy2("image_avec_message_codé.png", nom_repertoire)
+os.remove("image_avec_message_codé.png")
 
-nom_repertoire = askdirectory(initialdir="/",title='Choisissez un repertoire')
-
-shutil.copy('image_avec_message_codé.png', nom_repertoire)
 ### FIN ###
 
 #imgnew.save("image_avec_message_codé.png")  # Enregistre sous le nom choisit la nouvelle image, extension précisée
