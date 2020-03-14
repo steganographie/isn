@@ -1,15 +1,14 @@
-from tkinter.filedialog import * #Depuis tkinter import tout le contenu de filedialog
-from typing import Any, Tuple
-
-from PIL import Image # Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
-
-import shutil,os
+import shutil
+from tkinter.filedialog import *  # Depuis tkinter import tout le contenu de filedialog
+from PIL import Image  # Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
+import os
 
 ### IMPORTER L'IMAGE VIA INTERFACE GRAPHIQUE ###
 
-nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('png files','.png'),('all files','.*')])
-#Permet de choisir son fichier via interface graphique et enregistre le cehmin sous une variable
-print(nom_image) #Affiche le chemin de l'image , OPTIONNEL
+nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png','.png'),('image jpg','.jpg'),('images jpeg','.jpeg'),('images ppm','.ppm'),('images gif','.gif'),('images tiff','.tiff'),('images bmp','.bmp')])
+#Permet de choisir son fichier via interface graphique et enregistre le chemin sous une variable
+
+print("Le chemin du fichier image est :",nom_image) #Affiche le chemin de l'image , OPTIONNEL
 
 img = Image.open(nom_image)
 
@@ -31,24 +30,9 @@ red_sum = sum(red) #Somme des intensités des rouges
 green_sum =sum(green)
 blue_sum = sum(blue)
 
-
-#### FONCTION QUI DETERMINE LES COULEURS DOMINANTE MAIS EXISTE PLUS SIMPLE AVEC LA LISTE EN-DESSOUS ####
-#if blue_sum > green_sum and red_sum :
-    #print("Couleur dominante : Bleu")
-
-#if green_sum > red_sum and blue_sum:
-    #print("Couleur dominante : Vert")
-
-#if red_sum > blue_sum and green_sum :
-    #print("Couleur dominante : Rouge")
-#### FIN ####
-
 taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
 
-### CHOIX A FAIRE JOUER SUR LA COULEUR LA + ou - PRESENTE ? POUR L'INSTANT, LA - PRESENTE ####
-taille.sort() #tri dans l'ordre croissant, on joue sur la couleur la moins présente (taille[0])
-#taille.sort(reverse=False) tri dans l'ordre décroissant pour jouer sur la couleur la plus présente (taille[0])
-### FIN ###
+taille.sort(reverse=False) #tri dans l'ordre décroissant, on joue sur la couleur la plus présente (taille[0])
 
 if taille[0] == red_sum: #si la couleur la DEPEND DU CHOIX PRECEDENT présente est le rouge
     couleur_acc = list(r.getdata()) # alors on modifie l'intensité du rouge
@@ -74,16 +58,19 @@ v = bin(u)[2:].rjust(8, "0")  # On transforme en binaire, met un longeur de 8 bi
 
 ascii = [bin(ord(i))[2:].rjust(8, "0") for i in c]  # Convertit en binaire la valeur decimale de chaque lettre composant la message que veut coder l'utilisateur dans l'image
 
+### PARTIE COMPLIQUE ###
+
 a = ''.join(ascii)  # crée liste qui prends la valeur des 8 bits en rouge
 
 for j in range(8):
     couleur_acc[j] = 2 * int(couleur_acc[j] // 2) + int(v[j])  # PAS COMPRIS
 
-# on code la chaine dans les pixels suivants PAS ENCORE COMPRS
 for k in range(8 * u):
     couleur_acc[k + 8] = 2 * int(couleur_acc[k + 8] // 2) + int(a[k])
 
-couleur_modifiee = Image.new("L", (l,h))  # Creation d'une nouvelle image vide de meme dimensions que celle importée, mode "L" signifie en 8bits pixels, en noir et blanc
+## FIN ###
+
+couleur_modifiee = Image.new("L", (l,h))  # Creation d'une nouvelle image vide de meme dimensions que celle importée, mode "L" signifie en 8 bits pixels, en noir et blanc
 
 couleur_modifiee .putdata(couleur_acc)  # Ajout dans la nouvelle image des teintes rouges modifiées qui contiennent
 
@@ -99,15 +86,14 @@ if taille[0] == blue_sum:
 
 ### CHOISIR OU ENREGISTRER LA NOUVELLE IMAGE ###
 
-nom_repertoire = askdirectory(initialdir="/",title='Choisissez un repertoire') #demande le repertoire
+nom_repertoire = askdirectory(initialdir="/",title='Choix du répertoire') #demande le repertoire
 
-print(nom_repertoire)
+print("Le répertoire est :",nom_repertoire) #affiche le répertoire pris
 
-imgnew.save("image_avec_message_codé.png")
-shutil.copy2("image_avec_message_codé.png", nom_repertoire)
-os.remove("image_avec_message_codé.png")
+imgnew.save("image_avec_message_codé.png") # Enregistre sous le nom choisit la nouvelle image, extension précisée et enregistre dans le dossier ou se trouve le script en python
+
+shutil.copy2("image_avec_message_codé.png", nom_repertoire) #fait une copie dans le répertoire que l'utilisateur a pris
+
+os.remove("image_avec_message_codé.png") #supprime le fichier image modifiée dans le dossier ou se trouve le script python
 
 ### FIN ###
-
-#imgnew.save("image_avec_message_codé.png")  # Enregistre sous le nom choisit la nouvelle image, extension précisée
-#enregistre dans le dossier ou se trouve le script en python
