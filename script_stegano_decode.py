@@ -1,6 +1,11 @@
-from PIL import Image #Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
+import shutil
+from tkinter.filedialog import *  # Depuis tkinter import tout le contenu de filedialog
+from PIL import Image  # Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
+import os
 
-im = Image.open("image_avec_message_codé.png") #Enregistre l'image sous la variable
+nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png','.png'),('image jpg','.jpg'),('images jpeg','.jpeg'),('images ppm','.ppm'),('images bmp','.bmp')])
+
+im = Image.open(nom_image) #Enregistre l'image sous la variable
 
 r,g,b=im.split()
 
@@ -29,9 +34,10 @@ blue_sum = sum(blue)
 taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
 
 ### CHOIX A FAIRE JOUER SUR LA COULEUR LA + ou - PRESENTE ? POUR L'INSTANT, LA - PRESENTE ###
-taille.sort() #tri dans l'ordre croissant, on joue sur la couleur la moins présente (taille[0])
-#taille.sort(reverse=False) tri dans l'ordre décroissant pour jouer sur la couleur la plus présente (taille[0])
-### FIN ###
+
+taille.sort(reverse=False) #tri dans l'ordre décroissant pour jouer sur la couleur la plus présente (taille[0])
+
+### FIN ##
 
 if taille[0] == red_sum: #si la couleur la DEPEND DU CHOIX PRECEDENT présente est le rouge
     couleur_acc = list(r.getdata()) # alors on modifie l'intensité du rouge
@@ -49,19 +55,15 @@ if taille[0] == blue_sum:
 #### FIN ####
 
 p=[str(x%2) for x in couleur_acc[0:8]]
-
 q="".join(p)
-
 q=int(q,2)
-
+#lecture du message
 n=[str(x%2) for x in couleur_acc[8:8*(q+1)]]
 
-b = "".join(n)
-
+b="".join(n)
 message=""
 
 for k in range(0,q):
     l=b[8*k:8*k+8]
     message=message+chr(int(l,2))
 print (message)
-
