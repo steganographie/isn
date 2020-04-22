@@ -1,9 +1,7 @@
-import shutil
 from tkinter.filedialog import *  # Depuis tkinter import tout le contenu de filedialog
 from PIL import Image  # Depuis le module PIL, importer image, permet d'effectuer des actions sur des images
-import os
 
-nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png','.png'),('image jpg','.jpg'),('images jpeg','.jpeg'),('images ppm','.ppm'),('images bmp','.bmp')])
+nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png','.png'),('images jpeg','.jpeg'),('images ppm','.ppm'),('images bmp','.bmp')])
 
 im = Image.open(nom_image) #Enregistre l'image sous la variable
 
@@ -19,21 +17,11 @@ red_sum = sum(red) #Somme des intensités des rouges
 green_sum =sum(green)
 blue_sum = sum(blue)
 
-
-#### FONCTION QUI DETERMINE LES COULEURS DOMINANTE MAIS EXISTE PLUS SIMPLE AVEC LA LISTE EN-DESSOUS ####
-#if blue_sum > green_sum and red_sum :
-    #print("Couleur dominante : Bleu")
-
-#if green_sum > red_sum and blue_sum:
-    #print("Couleur dominante : Vert")
-
-#if red_sum > blue_sum and green_sum :
-    #print("Couleur dominante : Rouge")
 #### FIN ####
 
 taille=[red_sum, green_sum, blue_sum] #Liste contenant les valeurs des intensitées des 3 couleurs
 
-### CHOIX A FAIRE JOUER SUR LA COULEUR LA + ou - PRESENTE ? POUR L'INSTANT, LA - PRESENTE ###
+#### TROUVER DE QUELLE COULEUR L'INTENSITE A ETE AUGMENTEE ####
 
 taille.sort(reverse=False) #tri dans l'ordre décroissant pour jouer sur la couleur la plus présente (taille[0])
 
@@ -66,4 +54,4 @@ message=""
 for k in range(0,q):
     l=b[8*k:8*k+8]
     message=message+chr(int(l,2))
-print (message)
+print ("Le texte encodé dans l'image est :",message)
