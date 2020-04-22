@@ -5,7 +5,7 @@ import os
 
 ### IMPORTER L'IMAGE VIA INTERFACE GRAPHIQUE ###
 
-nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png','.png'),('image jpg','.jpg'),('images jpeg','.jpeg'),('images ppm','.ppm'),('images tiff','.tiff'),('images bmp','.bmp')])
+nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png','.png'),('image jpg','.jpg'),('images jpeg','.jpeg'),('images ppm','.ppm'),('images bmp','.bmp')])
 #Permet de choisir son fichier via interface graphique et enregistre le chemin sous une variable
 
 print("Le chemin du fichier image est :",nom_image) #Affiche le chemin de l'image , OPTIONNEL
