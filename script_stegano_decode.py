@@ -31,8 +31,6 @@ if taille[0] == green_sum:
 if taille[0] == blue_sum:
     couleur_acc = list(b.getdata())
 
-#Passer par une somme n'est pas obligatoire mais a du sens car comment dit on qu'une liste et plus forte qu'une autre ? Alors que pour une somme, il faut juste comparer les résultats
-
 #### Décodage du texte ####
 
 p=[str(x%2) for x in couleur_acc[0:8]]
