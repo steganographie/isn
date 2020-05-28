@@ -10,13 +10,13 @@ nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png'
 
 print("Le chemin du fichier image est :",nom_image) #Affiche le chemin de l'image choisie
 
-img = Image.open(nom_image) #Ouvre l'image pour en extraire des propriétés par la suite
+img = Image.open(nom_image)
 
 ### Caractéristiques de l'image ###
 
-l, h = img.size  #Renvoie un tupple contenant (largeur,hauteur)
+l, h = img.size
 
-r, g, b = img.split()  #Renvoie un tupple, Crée 3 nouvelles images à partir de celle de base, contenant chacune des bandes originales dans l'ordre rouge, vert et bleu
+r, g, b = img.split()
 
 #### Trouver la couleur la plus présente ####
 
@@ -68,7 +68,7 @@ for k in range(8 * u):
 
 couleur_modifiee = Image.new("L", (l,h))  # Creation d'une nouvelle image vide de memes dimensions que celle importée, mode "L" signifie en 8 bits pixels, en noir et blanc
 
-couleur_modifiee .putdata(couleur_acc)  # Ajout dans la nouvelle image des teintes rouges modifiées qui contiennent le message de l'utilisateur
+couleur_modifiee.putdata(couleur_acc)  # Ajout dans la nouvelle image des teintes rouges modifiées qui contiennent le message de l'utilisateur
 
 if taille[0] == red_sum:
     imgnew = Image.merge('RGB', (couleur_modifiee, g, b))  # Ajoute les bandes bleues et vertes de l'image de base et y ajoute la nouvelle teinte rouge qui contient le texte

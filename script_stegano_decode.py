@@ -4,7 +4,7 @@ from PIL import Image
 nom_image = askopenfilename(title=u"Ouvrir votre image",filetypes=[('images png','.png'),('images jpeg','.jpeg'),('images ppm','.ppm'),('images bmp','.bmp')])
 #cf ligne 9 programme script_stegano_code.py
 
-im = Image.open(nom_image) #cf ligne 13 programme script_stegano_code.py
+im = Image.open(nom_image)
 
 r,g,b=im.split() #Eclate l'image en 3 bandes rouge, vert et bleu
 
